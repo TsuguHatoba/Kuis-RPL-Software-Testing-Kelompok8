@@ -17,7 +17,8 @@ internal class StudentTest {
     @Test
     fun testFullIdentificationSuccess() {
         val student = Student(5, "Joko Tarbiah", "10 Agustus 2019", "085312345678")
-        assertEquals("5 Joko Tarbiah 10 Agustus 2019 085312345678", student.getFullIdentification(), "Tidak Sesuai")
+        val FullIdentificationTest = student.getFullIdentification()
+        assertEquals("5 Joko Tarbiah 10 Agustus 2019 085312345678", FullIdentificationTest, "Tidak Sesuai")
     }
 
     @Test
@@ -65,23 +66,24 @@ internal class StudentTest {
     fun testFormatTanggal(){
         val tanggal = "10 Agustus 2019"
 
-        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("in", "ID"))
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale("in", "ID"))
         val date = LocalDate.parse(tanggal, formatter)
         val expectation = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
 
-        assertEquals(expectation, student.formatTanggal(tanggal))
+        assertEquals(expectation, student.formatTanggal(tanggal), "Test Format Tanggal Gagal")
     }
 
     @Test
     fun testNIMSuccess(){
         val tanggal = student.formatTanggal("10 Agustus 2019")
         val data = student.NIM(5, "Joko Tarbiah", tanggal)
-        assertEquals("5JT10082019", data)
+        assertEquals("5JT10082019", data, "Test NIM Error")
     }
 
     @Test
     fun testStudentArrayList() {
         val student = Student(5, "Joko Tarbiah", "10 Agustus 2019", "085312345678")
-        assertEquals(student.getStudentArrayList, arrayListOf(student))
+        val testStudentArray = student.getStudentArrayList
+        assertEquals(testStudentArray, arrayListOf(student), "Test Array Error")
     }
 }
